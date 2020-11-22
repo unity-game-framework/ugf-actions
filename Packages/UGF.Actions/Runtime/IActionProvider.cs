@@ -2,6 +2,12 @@
 {
     public interface IActionProvider
     {
-        IActionCommandProvider CommandProvider { get; }
+        IActionCommandProvider Current { get; }
+        IActionCommandProvider Queued { get; }
+
+        void Add<T>(T command) where T : IActionCommand;
+        void Add(IActionCommand command);
+        void Apply();
+        void Clear();
     }
 }

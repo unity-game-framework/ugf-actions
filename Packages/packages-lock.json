@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.ugf.package.name": {
-      "version": "file:Package",
+    "com.ugf.actions": {
+      "version": "file:UGF.Actions",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

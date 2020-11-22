@@ -1,0 +1,25 @@
+{
+  "name": "com.ugf.package.name",
+  "displayName": "UGF.Package.Name",
+  "version": "0.0.0-preview",
+  "unity": "2020.2",
+  "apiCompatibility": ".NET Standard 2.0",
+  "description": "No description.",
+  "author": {
+      "name": "Unity Game Framework",
+      "url": "https://github.com/unity-game-framework"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/unity-game-framework/ugf-draft.git"
+  },
+  "changelogUrl": "https://github.com/unity-game-framework/ugf-draft/blob/master/changelog.md",
+  "licensesUrl": "https://github.com/unity-game-framework/ugf-draft/blob/master/license",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@unity-game-framework"
+  },
+  "bintray": {
+    "registry": "https://api.bintray.com/content/unity-game-framework/public"
+  },
+  "dependencies": {}
+}

@@ -11,8 +11,9 @@ namespace UGF.Actions.Runtime
         void Add(IActionCommand command);
         void Add(Type type, IActionCommandStack commands);
         bool Remove(Type type);
-        void Clear(Type type);
         void Clear();
+        void ClearCommands(Type type);
+        void ClearCommandsAll();
         IActionCommandStack<T> Get<T>() where T : IActionCommand;
         IActionCommandStack Get(Type type);
         bool TryGet<T>(out IActionCommandStack<T> commands) where T : IActionCommand;

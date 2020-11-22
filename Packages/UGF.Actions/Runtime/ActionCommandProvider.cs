@@ -47,16 +47,24 @@ namespace UGF.Actions.Runtime
             return m_commands.Remove(type);
         }
 
-        public void Clear(Type type)
+        public void Clear()
+        {
+            m_commands.Clear();
+        }
+
+        public void ClearCommands(Type type)
         {
             IActionCommandStack commands = Get(type);
 
             commands.Clear();
         }
 
-        public void Clear()
+        public void ClearCommandsAll()
         {
-            m_commands.Clear();
+            foreach (KeyValuePair<Type, IActionCommandStack> pair in m_commands)
+            {
+                pair.Value.Clear();
+            }
         }
 
         public IActionCommandStack<T> Get<T>() where T : IActionCommand

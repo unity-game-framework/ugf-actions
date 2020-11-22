@@ -8,5 +8,6 @@
         void Add(IActionCommand command);
         void Clear();
         IActionCommand Get(int index);
+        void CopyFrom(IActionCommandStack commands);
     }
 }

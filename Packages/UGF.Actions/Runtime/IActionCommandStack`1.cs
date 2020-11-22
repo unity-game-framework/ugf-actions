@@ -4,5 +4,6 @@
     {
         void Add(TCommand command);
         new ref TCommand Get(int index);
+        void CopyFrom(IActionCommandStack<TCommand> commands);
     }
 }

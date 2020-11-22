@@ -7,7 +7,8 @@
 
         void Add<T>(T command) where T : IActionCommand;
         void Add(IActionCommand command);
-        void Apply();
+        void ApplyQueued();
+        void ClearCommands();
         void Clear();
     }
 }

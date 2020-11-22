@@ -35,6 +35,25 @@ namespace UGF.Actions.Runtime
             return ref m_commands[index];
         }
 
+        public void CopyFrom(IActionCommandStack<TCommand> commands)
+        {
+            if (commands == null) throw new ArgumentNullException(nameof(commands));
+
+            Clear();
+
+            for (int i = 0; i < commands.Count; i++)
+            {
+                TCommand command = commands.Get(i);
+
+                Add(command);
+            }
+        }
+
+        void IActionCommandStack.CopyFrom(IActionCommandStack commands)
+        {
+            CopyFrom((IActionCommandStack<TCommand>)commands);
+        }
+
         void IActionCommandStack.Add(IActionCommand command)
         {
             Add((TCommand)command);

@@ -6,6 +6,7 @@ namespace UGF.Actions.Runtime
     public interface IActionCommandProvider
     {
         IReadOnlyDictionary<Type, IActionCommandStack> Commands { get; }
+        IReadOnlyList<Type> Types { get; }
 
         void Add<T>(T command) where T : IActionCommand;
         void Add(IActionCommand command);

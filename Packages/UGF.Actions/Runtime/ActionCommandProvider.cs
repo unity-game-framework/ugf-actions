@@ -7,12 +7,15 @@ namespace UGF.Actions.Runtime
     public class ActionCommandProvider : IActionCommandProvider
     {
         public IReadOnlyDictionary<Type, IActionCommandStack> Commands { get; }
+        public IReadOnlyList<Type> Types { get; }
 
         private readonly Dictionary<Type, IActionCommandStack> m_commands = new Dictionary<Type, IActionCommandStack>();
+        private readonly List<Type> m_types = new List<Type>();
 
         public ActionCommandProvider()
         {
             Commands = new ReadOnlyDictionary<Type, IActionCommandStack>(m_commands);
+            Types = new ReadOnlyCollection<Type>(m_types);
         }
 
         public void Add<T>(T command) where T : IActionCommand
@@ -38,13 +41,19 @@ namespace UGF.Actions.Runtime
             if (commands == null) throw new ArgumentNullException(nameof(commands));
 
             m_commands.Add(type, commands);
+            m_types.Add(type);
         }
 
         public bool Remove(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return m_commands.Remove(type);
+            if (m_commands.Remove(type))
+            {
+                m_types.Remove(type);
+            }
+
+            return false;
         }
 
         public void Clear()

@@ -1,19 +1,19 @@
 {
-  "name": "com.ugf.package.name",
-  "displayName": "UGF.Package.Name",
+  "name": "com.ugf.actions",
+  "displayName": "UGF.Actions",
   "version": "0.0.0-preview",
   "unity": "2020.2",
   "apiCompatibility": ".NET Standard 2.0",
-  "description": "No description.",
+  "description": "Actions system implementation.",
   "author": {
-      "name": "Unity Game Framework",
-      "url": "https://github.com/unity-game-framework"
+    "name": "Unity Game Framework",
+    "url": "https://github.com/unity-game-framework"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/unity-game-framework/ugf-draft.git"
+    "url": "git://github.com/unity-game-framework/ugf-actions.git"
   },
-  "changelogUrl": "https://github.com/unity-game-framework/ugf-draft/blob/master/changelog.md",
+  "changelogUrl": "https://github.com/unity-game-framework/ugf-actions/blob/master/changelog.md",
   "licensesUrl": "https://github.com/unity-game-framework/ugf-draft/blob/master/license",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@unity-game-framework"
@@ -21,5 +21,6 @@
   "bintray": {
     "registry": "https://api.bintray.com/content/unity-game-framework/public"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "licenseUrl": "https://github.com/unity-game-framework/ugf-actions/blob/master/license"
 }

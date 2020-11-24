@@ -4,17 +4,17 @@
     {
         protected override void OnExecute(IActionProvider provider, IActionContext context)
         {
-            if (provider.Current.TryGet(out IActionCommandStack<TCommand> commands))
+            if (provider.Current.TryGet(out IActionCommandList<TCommand> commands))
             {
                 for (int i = 0; i < commands.Count; i++)
                 {
-                    ref TCommand command = ref commands.Get(i);
+                    TCommand command = commands.Get(i);
 
-                    OnExecute(provider, context, in command);
+                    OnExecute(provider, context, command);
                 }
             }
         }
 
-        protected abstract void OnExecute(IActionProvider provider, IActionContext context, in TCommand command);
+        protected abstract void OnExecute(IActionProvider provider, IActionContext context, TCommand command);
     }
 }

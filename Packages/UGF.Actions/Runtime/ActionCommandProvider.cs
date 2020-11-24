@@ -6,21 +6,21 @@ namespace UGF.Actions.Runtime
 {
     public class ActionCommandProvider : IActionCommandProvider
     {
-        public IReadOnlyDictionary<Type, IActionCommandStack> Commands { get; }
+        public IReadOnlyDictionary<Type, IActionCommandList> Commands { get; }
         public IReadOnlyList<Type> Types { get; }
 
-        private readonly Dictionary<Type, IActionCommandStack> m_commands = new Dictionary<Type, IActionCommandStack>();
+        private readonly Dictionary<Type, IActionCommandList> m_commands = new Dictionary<Type, IActionCommandList>();
         private readonly List<Type> m_types = new List<Type>();
 
         public ActionCommandProvider()
         {
-            Commands = new ReadOnlyDictionary<Type, IActionCommandStack>(m_commands);
+            Commands = new ReadOnlyDictionary<Type, IActionCommandList>(m_commands);
             Types = new ReadOnlyCollection<Type>(m_types);
         }
 
         public void Add<T>(T command) where T : IActionCommand
         {
-            IActionCommandStack<T> commands = Get<T>();
+            IActionCommandList<T> commands = Get<T>();
 
             commands.Add(command);
         }
@@ -30,12 +30,12 @@ namespace UGF.Actions.Runtime
             if (command == null) throw new ArgumentNullException(nameof(command));
 
             Type type = command.GetType();
-            IActionCommandStack commands = Get(type);
+            IActionCommandList commands = Get(type);
 
             commands.Add(command);
         }
 
-        public void Add(Type type, IActionCommandStack commands)
+        public void Add(Type type, IActionCommandList commands)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
             if (commands == null) throw new ArgumentNullException(nameof(commands));
@@ -63,34 +63,34 @@ namespace UGF.Actions.Runtime
 
         public void ClearCommands(Type type)
         {
-            IActionCommandStack commands = Get(type);
+            IActionCommandList commands = Get(type);
 
             commands.Clear();
         }
 
         public void ClearCommandsAll()
         {
-            foreach (KeyValuePair<Type, IActionCommandStack> pair in m_commands)
+            foreach (KeyValuePair<Type, IActionCommandList> pair in m_commands)
             {
                 pair.Value.Clear();
             }
         }
 
-        public IActionCommandStack<T> Get<T>() where T : IActionCommand
+        public IActionCommandList<T> Get<T>() where T : IActionCommand
         {
-            return TryGet(out IActionCommandStack<T> commands) ? commands : throw new ArgumentException($"Commands not found by the specified type: '{typeof(T)}'.");
+            return TryGet(out IActionCommandList<T> commands) ? commands : throw new ArgumentException($"Commands not found by the specified type: '{typeof(T)}'.");
         }
 
-        public IActionCommandStack Get(Type type)
+        public IActionCommandList Get(Type type)
         {
-            return TryGet(type, out IActionCommandStack commands) ? commands : throw new ArgumentException($"Commands not found by the specified type: '{type}'.");
+            return TryGet(type, out IActionCommandList commands) ? commands : throw new ArgumentException($"Commands not found by the specified type: '{type}'.");
         }
 
-        public bool TryGet<T>(out IActionCommandStack<T> commands) where T : IActionCommand
+        public bool TryGet<T>(out IActionCommandList<T> commands) where T : IActionCommand
         {
-            if (TryGet(typeof(T), out IActionCommandStack value))
+            if (TryGet(typeof(T), out IActionCommandList value))
             {
-                commands = (IActionCommandStack<T>)value;
+                commands = (IActionCommandList<T>)value;
                 return true;
             }
 
@@ -98,14 +98,14 @@ namespace UGF.Actions.Runtime
             return false;
         }
 
-        public bool TryGet(Type type, out IActionCommandStack commands)
+        public bool TryGet(Type type, out IActionCommandList commands)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
             return m_commands.TryGetValue(type, out commands);
         }
 
-        public Dictionary<Type, IActionCommandStack>.Enumerator GetEnumerator()
+        public Dictionary<Type, IActionCommandList>.Enumerator GetEnumerator()
         {
             return m_commands.GetEnumerator();
         }

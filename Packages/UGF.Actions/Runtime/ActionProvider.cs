@@ -36,10 +36,10 @@ namespace UGF.Actions.Runtime
             for (int i = 0; i < Queued.Types.Count; i++)
             {
                 Type type = Queued.Types[i];
-                IActionCommandStack current = Current.Get(type);
-                IActionCommandStack queued = Queued.Get(type);
+                IActionCommandList current = Current.Get(type);
+                IActionCommandList queued = Queued.Get(type);
 
-                current.CopyFrom(queued);
+                queued.CopyTo(current);
             }
 
             Queued.ClearCommandsAll();

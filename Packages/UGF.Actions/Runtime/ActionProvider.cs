@@ -19,6 +19,12 @@ namespace UGF.Actions.Runtime
 
         public void Add<T>(T command) where T : IActionCommand
         {
+            if (!Queued.Commands.ContainsKey(typeof(T)))
+            {
+                Current.Add(typeof(T), new ActionCommandList<T>());
+                Queued.Add(typeof(T), new ActionCommandList<T>());
+            }
+
             Queued.Add(command);
         }
 

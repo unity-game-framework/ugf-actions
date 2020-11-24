@@ -6,6 +6,9 @@ namespace UGF.Actions.Runtime
     {
         IReadOnlyList<IAction> Actions { get; }
 
+        void Add(IAction action);
+        bool Remove(IAction action);
+        void Clear();
         void Execute(IActionProvider provider, IActionContext context);
     }
 }

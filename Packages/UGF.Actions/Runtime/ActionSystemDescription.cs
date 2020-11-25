@@ -10,8 +10,20 @@ namespace UGF.Actions.Runtime
 
         protected override IActionSystem OnBuild()
         {
-            var system = new ActionSystem();
+            IActionSystem system = OnBuildSystem();
 
+            OnBuildActions(system);
+
+            return system;
+        }
+
+        protected virtual IActionSystem OnBuildSystem()
+        {
+            return new ActionSystem();
+        }
+
+        protected virtual void OnBuildActions(IActionSystem system)
+        {
             foreach (KeyValuePair<string, IActionDescription> pair in Actions)
             {
                 IActionDescription description = pair.Value;
@@ -19,8 +31,6 @@ namespace UGF.Actions.Runtime
 
                 system.Add(action);
             }
-
-            return system;
         }
     }
 }

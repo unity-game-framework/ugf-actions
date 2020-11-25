@@ -1,30 +1,53 @@
-﻿using Unity.Profiling;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace UGF.Actions.Runtime
 {
     public class ActionSystem : ActionSystemBase
     {
-        private static readonly ProfilerMarker m_marker;
+        public override int Count { get { return m_actions.Count; } }
+        public IReadOnlyList<IAction> Actions { get; }
 
-#if ENABLE_PROFILER
-        static ActionSystem()
+        private readonly List<IAction> m_actions = new List<IAction>();
+
+        public ActionSystem()
         {
-            m_marker = new ProfilerMarker("ActionSystem");
+            Actions = new ReadOnlyCollection<IAction>(m_actions);
         }
-#endif
+
+        public List<IAction>.Enumerator GetEnumerator()
+        {
+            return m_actions.GetEnumerator();
+        }
+
+        protected override void OnAdd(IAction action)
+        {
+            m_actions.Add(action);
+        }
+
+        protected override bool OnRemove(IAction action)
+        {
+            return m_actions.Remove(action);
+        }
+
+        protected override void OnClear()
+        {
+            m_actions.Clear();
+        }
 
         protected override void OnExecute(IActionProvider provider, IActionContext context)
         {
-            m_marker.Begin();
-
-            for (int i = 0; i < Actions.Count; i++)
+            for (int i = 0; i < m_actions.Count; i++)
             {
-                IAction action = Actions[i];
+                IAction action = m_actions[i];
 
                 action.Execute(provider, context);
             }
+        }
 
-            m_marker.End();
+        protected override IEnumerator<IAction> OnGetEnumerator()
+        {
+            return m_actions.GetEnumerator();
         }
     }
 }

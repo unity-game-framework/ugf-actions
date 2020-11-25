@@ -7,15 +7,12 @@ namespace UGF.Actions.Runtime
     public class ActionCommandProvider : IActionCommandProvider
     {
         public IReadOnlyDictionary<Type, IActionCommandList> Commands { get; }
-        public IReadOnlyList<Type> Types { get; }
 
         private readonly Dictionary<Type, IActionCommandList> m_commands = new Dictionary<Type, IActionCommandList>();
-        private readonly List<Type> m_types = new List<Type>();
 
         public ActionCommandProvider()
         {
             Commands = new ReadOnlyDictionary<Type, IActionCommandList>(m_commands);
-            Types = new ReadOnlyCollection<Type>(m_types);
         }
 
         public void Add<T>(T command) where T : IActionCommand
@@ -41,19 +38,13 @@ namespace UGF.Actions.Runtime
             if (commands == null) throw new ArgumentNullException(nameof(commands));
 
             m_commands.Add(type, commands);
-            m_types.Add(type);
         }
 
         public bool Remove(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
-            if (m_commands.Remove(type))
-            {
-                m_types.Remove(type);
-            }
-
-            return false;
+            return m_commands.Remove(type);
         }
 
         public void Clear()
@@ -73,6 +64,19 @@ namespace UGF.Actions.Runtime
             foreach (KeyValuePair<Type, IActionCommandList> pair in m_commands)
             {
                 pair.Value.Clear();
+            }
+        }
+
+        public void CopyTo(IActionCommandProvider provider)
+        {
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+
+            foreach (KeyValuePair<Type, IActionCommandList> pair in m_commands)
+            {
+                if (provider.TryGet(pair.Key, out IActionCommandList commands))
+                {
+                    pair.Value.CopyTo(commands);
+                }
             }
         }
 

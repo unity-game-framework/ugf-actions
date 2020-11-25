@@ -2,9 +2,9 @@
 
 namespace UGF.Actions.Runtime
 {
-    public interface IActionSystem
+    public interface IActionSystem : IEnumerable<IAction>
     {
-        IReadOnlyList<IAction> Actions { get; }
+        int Count { get; }
 
         void Add(IAction action);
         bool Remove(IAction action);

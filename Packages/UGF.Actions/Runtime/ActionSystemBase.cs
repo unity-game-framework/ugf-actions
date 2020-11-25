@@ -1,37 +1,40 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using Unity.Profiling;
 
 namespace UGF.Actions.Runtime
 {
     public abstract class ActionSystemBase : IActionSystem
     {
-        public IReadOnlyList<IAction> Actions { get; }
+        public abstract int Count { get; }
 
-        private readonly List<IAction> m_actions = new List<IAction>();
+        private readonly ProfilerMarker m_marker;
 
+#if ENABLE_PROFILER
         protected ActionSystemBase()
         {
-            Actions = new ReadOnlyCollection<IAction>(m_actions);
+            m_marker = new ProfilerMarker(GetType().Name);
         }
+#endif
 
         public void Add(IAction action)
         {
             if (action == null) throw new ArgumentNullException(nameof(action));
 
-            m_actions.Add(action);
+            OnAdd(action);
         }
 
         public bool Remove(IAction action)
         {
             if (action == null) throw new ArgumentNullException(nameof(action));
 
-            return m_actions.Remove(action);
+            return OnRemove(action);
         }
 
         public void Clear()
         {
-            m_actions.Clear();
+            OnClear();
         }
 
         public void Execute(IActionProvider provider, IActionContext context)
@@ -39,9 +42,27 @@ namespace UGF.Actions.Runtime
             if (provider == null) throw new ArgumentNullException(nameof(provider));
             if (context == null) throw new ArgumentNullException(nameof(context));
 
+            m_marker.Begin();
+
             OnExecute(provider, context);
+
+            m_marker.End();
         }
 
+        protected abstract void OnAdd(IAction action);
+        protected abstract bool OnRemove(IAction action);
+        protected abstract void OnClear();
         protected abstract void OnExecute(IActionProvider provider, IActionContext context);
+        protected abstract IEnumerator<IAction> OnGetEnumerator();
+
+        IEnumerator<IAction> IEnumerable<IAction>.GetEnumerator()
+        {
+            return OnGetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return OnGetEnumerator();
+        }
     }
 }

@@ -38,16 +38,7 @@ namespace UGF.Actions.Runtime
         public void ApplyQueued()
         {
             Current.ClearCommandsAll();
-
-            for (int i = 0; i < Queued.Types.Count; i++)
-            {
-                Type type = Queued.Types[i];
-                IActionCommandList current = Current.Get(type);
-                IActionCommandList queued = Queued.Get(type);
-
-                queued.CopyTo(current);
-            }
-
+            Queued.CopyTo(Current);
             Queued.ClearCommandsAll();
         }
 

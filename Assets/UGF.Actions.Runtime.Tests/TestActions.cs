@@ -55,17 +55,14 @@ namespace UGF.Actions.Runtime.Tests
             var target = new Target();
             var provider = new ActionProvider();
             var context = new ActionContext { target };
-            var system = new ActionSystem();
-
-            system.Add(new ActionAdd());
-            system.Add(new ActionMultiply());
+            var system = new ActionSystem { new ActionAdd(), new ActionMultiply() };
 
             system.Execute(provider, context);
 
             Assert.AreEqual(0, target.Value);
 
-            provider.Add(new CommandAdd(1));
-            provider.Add(new CommandMultiply(4));
+            provider.Add(new CommandAdd(2));
+            provider.Add(new CommandMultiply(2));
             provider.ApplyQueued();
 
             system.Execute(provider, context);

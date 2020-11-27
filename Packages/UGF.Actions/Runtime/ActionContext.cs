@@ -1,33 +1,56 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace UGF.Actions.Runtime
 {
     public class ActionContext : IActionContext
     {
-        public IReadOnlyList<object> Values { get; }
-
-        private readonly List<object> m_values = new List<object>();
-
-        public ActionContext()
-        {
-            Values = new ReadOnlyCollection<object>(m_values);
-        }
+        private readonly Dictionary<Type, List<object>> m_values = new Dictionary<Type, List<object>>();
 
         public void Add(object value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            m_values.Add(value);
+            Type type = value.GetType();
+
+            if (!m_values.TryGetValue(type, out List<object> values))
+            {
+                values = new List<object>();
+
+                m_values.Add(type, values);
+            }
+
+            values.Add(value);
         }
 
         public bool Remove(object value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            return m_values.Remove(value);
+            Type type = value.GetType();
+
+            if (m_values.TryGetValue(type, out List<object> values) && values.Remove(value))
+            {
+                if (values.Count == 0)
+                {
+                    m_values.Remove(type);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public T Get<TArguments, T>(TArguments arguments, Func<TArguments, T, bool> predicate)
+        {
+            return TryGet(arguments, predicate, out T value) ? value : throw new ArgumentException($"Value not found by the specified predicate: '{predicate}'.");
+        }
+
+        public object Get<TArguments>(TArguments arguments, Func<TArguments, object, bool> predicate)
+        {
+            return TryGet(arguments, predicate, out object value) ? value : throw new ArgumentException($"Value not found by the specified predicate: '{predicate}'.");
         }
 
         public T Get<T>() where T : class
@@ -38,6 +61,49 @@ namespace UGF.Actions.Runtime
         public object Get(Type type)
         {
             return TryGet(type, out object value) ? value : throw new ArgumentException($"Value not found by the specified type: '{type}'.");
+        }
+
+        public bool TryGet<TArguments, T>(TArguments arguments, Func<TArguments, T, bool> predicate, out T value)
+        {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
+            foreach (KeyValuePair<Type, List<object>> pair in m_values)
+            {
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    object element = pair.Value[i];
+
+                    if (element is T target && predicate(arguments, target))
+                    {
+                        value = target;
+                        return true;
+                    }
+                }
+            }
+
+            value = default;
+            return false;
+        }
+
+        public bool TryGet<TArguments>(TArguments arguments, Func<TArguments, object, bool> predicate, out object value)
+        {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
+            foreach (KeyValuePair<Type, List<object>> pair in m_values)
+            {
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    value = pair.Value[i];
+
+                    if (predicate(arguments, value))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            value = default;
+            return false;
         }
 
         public bool TryGet<T>(out T value) where T : class
@@ -56,28 +122,27 @@ namespace UGF.Actions.Runtime
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
-            for (int i = 0; i < m_values.Count; i++)
+            if (m_values.TryGetValue(type, out List<object> values))
             {
-                value = m_values[i];
-
-                if (type.IsInstanceOfType(value))
-                {
-                    return true;
-                }
+                value = values[0];
+                return true;
             }
 
             value = default;
             return false;
         }
 
-        public List<object>.Enumerator GetEnumerator()
+        public IEnumerator<object> GetEnumerator()
         {
-            return m_values.GetEnumerator();
-        }
+            foreach (KeyValuePair<Type, List<object>> pair in m_values)
+            {
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    object value = pair.Value[i];
 
-        IEnumerator<object> IEnumerable<object>.GetEnumerator()
-        {
-            return GetEnumerator();
+                    yield return value;
+                }
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

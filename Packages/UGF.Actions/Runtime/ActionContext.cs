@@ -128,6 +128,15 @@ namespace UGF.Actions.Runtime
                 return true;
             }
 
+            foreach (KeyValuePair<Type, List<object>> pair in m_values)
+            {
+                if (type.IsAssignableFrom(pair.Key))
+                {
+                    value = pair.Value[0];
+                    return true;
+                }
+            }
+
             value = default;
             return false;
         }

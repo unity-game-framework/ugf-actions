@@ -1,9 +1,16 @@
-﻿namespace UGF.Actions.Runtime
+﻿using System;
+
+namespace UGF.Actions.Runtime
 {
-    public class ActionSystemDescription : ActionSystemDescriptionBase
+    public class ActionSystemDescription : IActionSystemDescription
     {
-        public ActionSystemDescription(string groupId) : base(groupId)
+        public string GroupId { get; }
+
+        protected ActionSystemDescription(string groupId)
         {
+            if (string.IsNullOrEmpty(groupId)) throw new ArgumentException("Value cannot be null or empty.", nameof(groupId));
+
+            GroupId = groupId;
         }
     }
 }

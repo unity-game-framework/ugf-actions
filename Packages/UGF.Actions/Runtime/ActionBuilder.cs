@@ -1,6 +1,6 @@
 ﻿namespace UGF.Actions.Runtime
 {
-    public class ActionDescription<TAction> : ActionDescriptionBase where TAction : class, IAction, new()
+    public class ActionBuilder<TAction> : ActionBuilderBase where TAction : class, IAction, new()
     {
         protected override IAction OnBuild()
         {

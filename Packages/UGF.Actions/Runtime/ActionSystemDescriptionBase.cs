@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace UGF.Actions.Runtime
 {
     public abstract class ActionSystemDescriptionBase : IActionSystemDescription
     {
         public string GroupId { get; }
-        public Dictionary<string, IActionDescription> Actions { get; } = new Dictionary<string, IActionDescription>();
-
-        IReadOnlyDictionary<string, IActionDescription> IActionSystemDescription.Actions { get { return Actions; } }
 
         protected ActionSystemDescriptionBase(string groupId)
         {
@@ -16,17 +12,5 @@ namespace UGF.Actions.Runtime
 
             GroupId = groupId;
         }
-
-        public T Build<T>() where T : class, IActionSystem
-        {
-            return (T)OnBuild();
-        }
-
-        public IActionSystem Build()
-        {
-            return OnBuild();
-        }
-
-        protected abstract IActionSystem OnBuild();
     }
 }

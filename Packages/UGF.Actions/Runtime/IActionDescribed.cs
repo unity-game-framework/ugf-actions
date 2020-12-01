@@ -2,7 +2,7 @@
 
 namespace UGF.Actions.Runtime
 {
-    public interface IActionDescribed : IAction, IDescribed
+    public interface IActionDescribed : IAction, IDescribed<IActionDescription>
     {
     }
 }

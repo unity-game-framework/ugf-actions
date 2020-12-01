@@ -1,7 +1,10 @@
 {
     "name": "UGF.Actions.Runtime",
     "rootNamespace": "UGF.Actions.Runtime",
-    "references": [],
+    "references": [
+        "GUID:6c7389a7d4bbed54e96eb1e71a69798e",
+        "GUID:3ad3a680cb737c6428dc532d551e7bb7"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,7 +1,8 @@
-﻿namespace UGF.Actions.Runtime
+﻿using UGF.Description.Runtime;
+
+namespace UGF.Actions.Runtime
 {
-    public interface IActionDescribed : IAction
+    public interface IActionDescribed : IAction, IDescribed
     {
-        IActionDescription Description { get; }
     }
 }

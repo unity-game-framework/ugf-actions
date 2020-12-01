@@ -1,8 +1,8 @@
-﻿namespace UGF.Actions.Runtime
+﻿using UGF.Builder.Runtime;
+
+namespace UGF.Actions.Runtime
 {
-    public interface IActionBuilder
+    public interface IActionBuilder : IBuilder<IAction>
     {
-        T Build<T>() where T : class, IAction;
-        IAction Build();
     }
 }

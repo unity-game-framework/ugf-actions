@@ -6,6 +6,18 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.ugf.builder": {
+      "version": "file:../../ugf-builder/Packages/UGF.Builder",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.ugf.description": {
+      "version": "file:../../ugf-description/Packages/UGF.Description",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.0",
       "depth": 1,

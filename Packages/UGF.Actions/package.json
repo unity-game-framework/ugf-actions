@@ -14,13 +14,15 @@
     "url": "git://github.com/unity-game-framework/ugf-actions.git"
   },
   "changelogUrl": "https://github.com/unity-game-framework/ugf-actions/blob/master/changelog.md",
-  "licensesUrl": "https://github.com/unity-game-framework/ugf-draft/blob/master/license",
+  "licensesUrl": "https://github.com/unity-game-framework/ugf-actions/blob/master/license",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@unity-game-framework"
   },
   "bintray": {
     "registry": "https://api.bintray.com/content/unity-game-framework/public"
   },
-  "dependencies": {},
-  "licenseUrl": "https://github.com/unity-game-framework/ugf-actions/blob/master/license"
+  "dependencies": {
+    "com.ugf.builder": "2.0.0",
+    "com.ugf.description": "2.0.0"
+  }
 }

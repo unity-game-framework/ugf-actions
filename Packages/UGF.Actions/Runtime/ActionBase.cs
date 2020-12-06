@@ -10,7 +10,7 @@ namespace UGF.Actions.Runtime
 #if ENABLE_PROFILER
         protected ActionBase()
         {
-            m_marker = new ProfilerMarker(GetType().Name);
+            m_marker = new ProfilerMarker(GetType().ToString());
         }
 #endif
 

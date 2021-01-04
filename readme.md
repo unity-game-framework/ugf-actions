@@ -4,7 +4,7 @@ UGF.Actions
 
 ## Info
 
-- **Version**: `1.0.1`
+- **Version**: `2.0.0`
 - **Unity**: `2020.2`
 - **API Compatibility Level**: `.NET Standard 2.0`
 

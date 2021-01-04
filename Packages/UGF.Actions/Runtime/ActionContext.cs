@@ -43,12 +43,12 @@ namespace UGF.Actions.Runtime
             return false;
         }
 
-        public T Get<TArguments, T>(TArguments arguments, Func<TArguments, T, bool> predicate)
+        public T Get<TArguments, T>(TArguments arguments, ActionContextPredicate<TArguments, T> predicate)
         {
             return TryGet(arguments, predicate, out T value) ? value : throw new ArgumentException($"Value not found by the specified predicate: '{predicate}'.");
         }
 
-        public object Get<TArguments>(TArguments arguments, Func<TArguments, object, bool> predicate)
+        public object Get<TArguments>(TArguments arguments, ActionContextPredicate<TArguments, object> predicate)
         {
             return TryGet(arguments, predicate, out object value) ? value : throw new ArgumentException($"Value not found by the specified predicate: '{predicate}'.");
         }
@@ -63,7 +63,7 @@ namespace UGF.Actions.Runtime
             return TryGet(type, out object value) ? value : throw new ArgumentException($"Value not found by the specified type: '{type}'.");
         }
 
-        public bool TryGet<TArguments, T>(TArguments arguments, Func<TArguments, T, bool> predicate, out T value)
+        public bool TryGet<TArguments, T>(TArguments arguments, ActionContextPredicate<TArguments, T> predicate, out T value)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
@@ -85,7 +85,7 @@ namespace UGF.Actions.Runtime
             return false;
         }
 
-        public bool TryGet<TArguments>(TArguments arguments, Func<TArguments, object, bool> predicate, out object value)
+        public bool TryGet<TArguments>(TArguments arguments, ActionContextPredicate<TArguments, object> predicate, out object value)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 

@@ -3,7 +3,7 @@ using UGF.Description.Runtime;
 
 namespace UGF.Actions.Runtime
 {
-    public abstract class ActionDescribed<TDescription> : ActionBase, IActionDescribed where TDescription : class, IActionDescription
+    public abstract class ActionDescribed<TDescription> : ActionBase, IDescribed<IActionDescription> where TDescription : class, IActionDescription
     {
         public TDescription Description { get; }
 

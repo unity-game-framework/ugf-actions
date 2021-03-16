@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using UGF.RuntimeTools.Runtime.Contexts;
 
 namespace UGF.Actions.Runtime.Tests
 {
@@ -31,7 +32,7 @@ namespace UGF.Actions.Runtime.Tests
 
         public class ActionAdd : Action<CommandAdd>
         {
-            protected override void OnExecute(IActionProvider provider, IActionContext context, CommandAdd command)
+            protected override void OnExecute(IActionProvider provider, IContext context, CommandAdd command)
             {
                 var target = context.Get<Target>();
 
@@ -41,7 +42,7 @@ namespace UGF.Actions.Runtime.Tests
 
         public class ActionMultiply : Action<CommandMultiply>
         {
-            protected override void OnExecute(IActionProvider provider, IActionContext context, CommandMultiply command)
+            protected override void OnExecute(IActionProvider provider, IContext context, CommandMultiply command)
             {
                 var target = context.Get<Target>();
 
@@ -54,7 +55,7 @@ namespace UGF.Actions.Runtime.Tests
         {
             var target = new Target();
             var provider = new ActionProvider();
-            var context = new ActionContext { target };
+            var context = new Context { target };
             var system = new ActionSystem { new ActionAdd(), new ActionMultiply() };
 
             system.Execute(provider, context);

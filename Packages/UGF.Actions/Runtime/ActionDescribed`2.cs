@@ -1,4 +1,6 @@
-﻿namespace UGF.Actions.Runtime
+﻿using UGF.RuntimeTools.Runtime.Contexts;
+
+namespace UGF.Actions.Runtime
 {
     public abstract class ActionDescribed<TDescription, TCommand> : ActionDescribed<TDescription>
         where TDescription : class, IActionDescription
@@ -8,7 +10,7 @@
         {
         }
 
-        protected override void OnExecute(IActionProvider provider, IActionContext context)
+        protected override void OnExecute(IActionProvider provider, IContext context)
         {
             if (provider.Current.TryGet(out IActionCommandList<TCommand> commands))
             {
@@ -21,6 +23,6 @@
             }
         }
 
-        protected abstract void OnExecute(IActionProvider provider, IActionContext context, TCommand command);
+        protected abstract void OnExecute(IActionProvider provider, IContext context, TCommand command);
     }
 }

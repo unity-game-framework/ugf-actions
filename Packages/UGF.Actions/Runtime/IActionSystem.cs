@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UGF.RuntimeTools.Runtime.Contexts;
 
 namespace UGF.Actions.Runtime
 {
@@ -9,6 +10,6 @@ namespace UGF.Actions.Runtime
         void Add(IAction action);
         bool Remove(IAction action);
         void Clear();
-        void Execute(IActionProvider provider, IActionContext context);
+        void Execute(IActionProvider provider, IContext context);
     }
 }

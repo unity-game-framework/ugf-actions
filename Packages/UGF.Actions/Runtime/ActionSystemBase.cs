@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UGF.RuntimeTools.Runtime.Contexts;
 using Unity.Profiling;
 
 namespace UGF.Actions.Runtime
@@ -37,7 +38,7 @@ namespace UGF.Actions.Runtime
             OnClear();
         }
 
-        public void Execute(IActionProvider provider, IActionContext context)
+        public void Execute(IActionProvider provider, IContext context)
         {
             if (provider == null) throw new ArgumentNullException(nameof(provider));
             if (context == null) throw new ArgumentNullException(nameof(context));
@@ -52,7 +53,7 @@ namespace UGF.Actions.Runtime
         protected abstract void OnAdd(IAction action);
         protected abstract bool OnRemove(IAction action);
         protected abstract void OnClear();
-        protected abstract void OnExecute(IActionProvider provider, IActionContext context);
+        protected abstract void OnExecute(IActionProvider provider, IContext context);
         protected abstract IEnumerator<IAction> OnGetEnumerator();
 
         IEnumerator<IAction> IEnumerable<IAction>.GetEnumerator()

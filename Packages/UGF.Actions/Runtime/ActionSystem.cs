@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UGF.RuntimeTools.Runtime.Contexts;
 
 namespace UGF.Actions.Runtime
 {
@@ -35,7 +36,7 @@ namespace UGF.Actions.Runtime
             m_actions.Clear();
         }
 
-        protected override void OnExecute(IActionProvider provider, IActionContext context)
+        protected override void OnExecute(IActionProvider provider, IContext context)
         {
             for (int i = 0; i < m_actions.Count; i++)
             {

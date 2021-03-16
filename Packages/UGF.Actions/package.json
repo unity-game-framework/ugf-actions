@@ -1,7 +1,7 @@
 {
   "name": "com.ugf.actions",
   "displayName": "UGF.Actions",
-  "version": "2.0.0",
+  "version": "3.0.0-preview",
   "unity": "2020.2",
   "apiCompatibility": ".NET Standard 2.0",
   "description": "Actions system implementation.",

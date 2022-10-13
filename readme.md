@@ -4,7 +4,7 @@ UGF.Actions
 
 ## Information
 
-- **Version**: `3.0.0-preview.1`
+- **Version**: `3.0.0-preview.2`
 - **Unity**: `2022.1`
 - **API Compatibility Level**: `.NET Standard 2.1`
 
@@ -13,6 +13,7 @@ UGF.Actions
 - `com.ugf.builder`: `2.0.2`
 - `com.ugf.description`: `2.0.0`
 - `com.ugf.runtimetools`: `2.16.0`
+- `com.ugf.initialize`: `2.9.0`
 
 
 ### Description

@@ -1,10 +1,11 @@
 ﻿using System;
+using UGF.Initialize.Runtime;
 using UGF.RuntimeTools.Runtime.Contexts;
 using Unity.Profiling;
 
 namespace UGF.Actions.Runtime
 {
-    public abstract class ActionBase : IAction
+    public abstract class ActionBase : Initializable, IAction
     {
         private readonly ProfilerMarker m_marker;
 

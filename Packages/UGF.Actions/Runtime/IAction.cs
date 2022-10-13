@@ -1,8 +1,9 @@
-﻿using UGF.RuntimeTools.Runtime.Contexts;
+﻿using UGF.Initialize.Runtime;
+using UGF.RuntimeTools.Runtime.Contexts;
 
 namespace UGF.Actions.Runtime
 {
-    public interface IAction
+    public interface IAction : IInitialize
     {
         void Execute(IActionProvider provider, IContext context);
     }

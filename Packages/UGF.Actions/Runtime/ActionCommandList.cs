@@ -9,7 +9,6 @@ namespace UGF.Actions.Runtime
         public int Count { get { return m_commands.Count; } }
 
         private readonly List<TCommand> m_commands;
-        private readonly Type m_type = typeof(TCommand);
 
         public ActionCommandList(int capacity = 64)
         {
@@ -18,14 +17,11 @@ namespace UGF.Actions.Runtime
 
         public void Add(TCommand command)
         {
-            if (m_type.IsClass && command == null) throw new ArgumentNullException(nameof(command));
-
             m_commands.Add(command);
         }
 
         public void Add(TCommand command, int index)
         {
-            if (m_type.IsClass && command == null) throw new ArgumentNullException(nameof(command));
             if (index < 0 || index >= m_commands.Count) throw new ArgumentOutOfRangeException(nameof(index));
 
             m_commands.Insert(index, command);
@@ -57,6 +53,8 @@ namespace UGF.Actions.Runtime
 
         public void CopyTo(IActionCommandList<TCommand> commands)
         {
+            if (commands == null) throw new ArgumentNullException(nameof(commands));
+
             for (int i = 0; i < m_commands.Count; i++)
             {
                 TCommand command = m_commands[i];

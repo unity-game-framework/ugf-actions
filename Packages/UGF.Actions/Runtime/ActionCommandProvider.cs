@@ -61,9 +61,9 @@ namespace UGF.Actions.Runtime
 
         public void ClearCommandsAll()
         {
-            foreach (KeyValuePair<Type, IActionCommandList> pair in m_commands)
+            foreach ((_, IActionCommandList value) in m_commands)
             {
-                pair.Value.Clear();
+                value.Clear();
             }
         }
 
@@ -71,11 +71,11 @@ namespace UGF.Actions.Runtime
         {
             if (provider == null) throw new ArgumentNullException(nameof(provider));
 
-            foreach (KeyValuePair<Type, IActionCommandList> pair in m_commands)
+            foreach ((Type key, IActionCommandList value) in m_commands)
             {
-                if (provider.TryGet(pair.Key, out IActionCommandList commands))
+                if (provider.TryGet(key, out IActionCommandList commands))
                 {
-                    pair.Value.CopyTo(commands);
+                    value.CopyTo(commands);
                 }
             }
         }

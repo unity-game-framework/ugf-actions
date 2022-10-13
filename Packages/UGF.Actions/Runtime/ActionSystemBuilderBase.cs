@@ -2,7 +2,7 @@
 
 namespace UGF.Actions.Runtime
 {
-    public abstract class ActionSystemBuilderBase : Builder<IActionSystem>, IActionSystemBuilder
+    public abstract class ActionSystemBuilderBase : Builder<IActionSystem>
     {
     }
 }

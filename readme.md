@@ -2,16 +2,17 @@
 
 UGF.Actions
 
-## Info
+## Information
 
-- **Version**: `3.0.0-preview`
-- **Unity**: `2020.2`
-- **API Compatibility Level**: `.NET Standard 2.0`
+- **Version**: `3.0.0-preview.1`
+- **Unity**: `2022.1`
+- **API Compatibility Level**: `.NET Standard 2.1`
 
 ### Dependencies
 
+- `com.ugf.builder`: `2.0.2`
 - `com.ugf.description`: `2.0.0`
-- `com.ugf.runtimetools`: `2.0.0`
+- `com.ugf.runtimetools`: `2.16.0`
 
 
 ### Description

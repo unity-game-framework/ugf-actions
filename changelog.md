@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-preview.1](https://github.com/unity-game-framework/ugf-actions/releases/tag/3.0.0-preview.1) - 2022-10-13  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-actions/milestone/4?closed=1)  
+    
+
+### Changed
+
+- Update project ([#15](https://github.com/unity-game-framework/ugf-actions/issues/15))  
+    - Update package _Unity_ version to `2022.1`.
+    - Update package _API Compatibility_ to `.NET Standard 2.1`.
+    - Change `ActionDescriptionBase` class name to `ActionDescription`.
+    - Remove `IActionBuilder` and `IActionSystemBuilder` interfaces.
+
 ## [3.0.0-preview](https://github.com/unity-game-framework/ugf-actions/releases/tag/3.0.0-preview) - 2021-03-16  
 
 ### Release Notes

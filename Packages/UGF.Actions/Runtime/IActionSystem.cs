@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using UGF.Initialize.Runtime;
 using UGF.RuntimeTools.Runtime.Contexts;
 
 namespace UGF.Actions.Runtime
 {
-    public interface IActionSystem : IEnumerable<IAction>
+    public interface IActionSystem : IInitialize, IEnumerable<IAction>
     {
         int Count { get; }
 

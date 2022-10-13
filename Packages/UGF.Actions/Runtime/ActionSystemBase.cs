@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UGF.Initialize.Runtime;
 using UGF.RuntimeTools.Runtime.Contexts;
 using Unity.Profiling;
 
 namespace UGF.Actions.Runtime
 {
-    public abstract class ActionSystemBase : IActionSystem
+    public abstract class ActionSystemBase : Initializable, IActionSystem
     {
         public abstract int Count { get; }
 

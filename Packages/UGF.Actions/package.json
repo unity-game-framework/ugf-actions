@@ -21,6 +21,7 @@
   "dependencies": {
     "com.ugf.builder": "2.0.2",
     "com.ugf.description": "2.0.0",
-    "com.ugf.runtimetools": "2.16.0"
+    "com.ugf.runtimetools": "2.16.0",
+    "com.ugf.initialize": "2.9.0"
   }
 }

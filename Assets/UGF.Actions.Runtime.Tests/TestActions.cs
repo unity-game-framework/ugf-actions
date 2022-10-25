@@ -30,7 +30,7 @@ namespace UGF.Actions.Runtime.Tests
             }
         }
 
-        public class ActionAdd : Action<CommandAdd>
+        public class ActionAdd : ActionBase<CommandAdd>
         {
             protected override void OnExecute(IActionProvider provider, IContext context, CommandAdd command)
             {
@@ -40,7 +40,7 @@ namespace UGF.Actions.Runtime.Tests
             }
         }
 
-        public class ActionMultiply : Action<CommandMultiply>
+        public class ActionMultiply : ActionBase<CommandMultiply>
         {
             protected override void OnExecute(IActionProvider provider, IContext context, CommandMultiply command)
             {

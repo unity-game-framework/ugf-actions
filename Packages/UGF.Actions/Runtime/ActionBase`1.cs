@@ -2,7 +2,7 @@
 
 namespace UGF.Actions.Runtime
 {
-    public abstract class Action<TCommand> : ActionBase where TCommand : IActionCommand
+    public abstract class ActionBase<TCommand> : ActionBase where TCommand : IActionCommand
     {
         protected override void OnExecute(IActionProvider provider, IContext context)
         {

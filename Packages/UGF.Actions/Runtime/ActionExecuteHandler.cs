@@ -2,5 +2,5 @@
 
 namespace UGF.Actions.Runtime
 {
-    public delegate void ActionExecuteHandler<in TCommand>(IActionProvider provider, IContext context, TCommand command) where TCommand : IActionCommand;
+    public delegate void ActionExecuteHandler(IActionProvider provider, IContext context);
 }

@@ -50,6 +50,18 @@ namespace UGF.Actions.Runtime.Tests
             }
         }
 
+        public class ActionHandlers : ActionExecuteList
+        {
+            public ActionHandlers()
+            {
+                Add<CommandMultiply>(OnMultiply);
+            }
+
+            private void OnMultiply(IActionProvider provider, IContext context, CommandMultiply command)
+            {
+            }
+        }
+
         [Test]
         public void Basic()
         {
